@@ -1,9 +1,10 @@
 import sys
 import os
 
-from conf import *
+from serverD.conf import *
 
 file_path = os.path.abspath(os.path.dirname(__file__))
+
 
 class ServerD:
 
@@ -115,9 +116,47 @@ class ServerD:
 
 
 def main():
-    base_server = sys.argv[1]
-    sd = ServerD()
-    sd.main(base_server)
+    try:
+        base_server = sys.argv[1]
+        sd = ServerD()
+        sd.main(base_server)
+    except IndexError:
+        print("参数异常: 正确格式如下:{}{}".format("go <服务器名称>\n",
+                                         "go put <服务器名称> <服务器文件路径> <本地文件路径>\n",
+                                         "go get <服务器名称> <服务器文件路径> <本地文件路径>\n",
+                                         "go root <服务器名称>\n",
+                                         "go tbj <密码>\n",
+                                         ))
+
+
+def get():
+    try:
+        base_server = "get"
+        sd = ServerD()
+        sd.main(base_server)
+    except IndexError:
+        print("参数异常: 正确格式如下:{}{}".format(
+            "go <服务器名称>\n",
+            "go root <服务器名称>\n",
+            "go tbj <密码>\n",
+            "put <服务器名称> <服务器文件路径> <本地文件路径>\n",
+            "get <服务器名称> <服务器文件路径> <本地文件路径>\n",
+        ))
+
+
+def put():
+    try:
+        base_server = "put"
+        sd = ServerD()
+        sd.main(base_server)
+    except IndexError:
+        print("参数异常: 正确格式如下:{}{}".format(
+            "go <服务器名称>\n",
+            "go root <服务器名称>\n",
+            "go tbj <密码>\n",
+            "put <服务器名称> <服务器文件路径> <本地文件路径>\n",
+            "get <服务器名称> <服务器文件路径> <本地文件路径>\n",
+        ))
 
 
 if __name__ == '__main__':
