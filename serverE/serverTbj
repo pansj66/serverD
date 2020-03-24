@@ -1,0 +1,14 @@
+#!/usr/bin/expect -f
+set user [lindex $argv 0]
+set host [lindex $argv 1]
+set password [lindex $argv 2]
+set port [lindex $argv 3]
+set pem [lindex $argv 4]
+send_user $password
+set timeout -1
+spawn ssh -i $pem $user@$host
+expect "*code:*"
+send_user $password
+send "$password\r"
+interact
+expect eof
